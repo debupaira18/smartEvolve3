@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Dashboard | SmartEval</title>
+  <link rel="stylesheet" href="/styles.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-page="dashboard">
+<div class="app-shell">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">🎓</div>
+      <div>
+        <div class="brand-name">SmartEval</div>
+        <div class="brand-sub">Faculty Portal</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-link active"><span class="icon">📊</span> Dashboard</a>
+      <div class="nav-section-label">Manage</div>
+      <a href="/students.html"    class="nav-link"><span class="icon">👥</span> Students</a>
+      <a href="/assignments.html" class="nav-link"><span class="icon">📋</span> Assignments</a>
+      <a href="/evaluation.html"  class="nav-link"><span class="icon">✏️</span> Evaluation</a>
+      <div class="nav-section-label">Reports</div>
+      <a href="/analytics.html" class="nav-link"><span class="icon">📈</span> Analytics</a>
+      <a href="/reports.html"   class="nav-link"><span class="icon">📄</span> Reports</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" id="darkToggle"><span class="icon">🌙</span> Dark Mode</a>
+      <a class="nav-link logout" id="logoutBtn"><span class="icon">🚪</span> Logout</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Page Content -->
+  <div class="page-content">
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <span class="topbar-title">Dashboard</span>
+      <div class="topbar-actions">
+        <span style="font-size:13px;color:var(--muted);">Good day, Faculty</span>
+      </div>
+    </header>
+    <main>
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Overview of your evaluation activity</p>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="grid grid-4" style="margin-bottom:24px;">
+        <div class="stat-card">
+          <div class="stat-label">Average Marks</div>
+          <div class="stat-value" id="avgMarks">—</div>
+          <div class="stat-sub">Across all evaluations</div>
+          <div class="stat-icon">📊</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">At-Risk Students</div>
+          <div class="stat-value danger" id="atRisk">—</div>
+          <div class="stat-sub">Grade D or F</div>
+          <div class="stat-icon">⚠️</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Evaluations</div>
+          <div class="stat-value" id="totalEvals">—</div>
+          <div class="stat-sub">Completed</div>
+          <div class="stat-icon">✅</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Top Performers</div>
+          <div class="stat-value success" id="topCount">—</div>
+          <div class="stat-sub">Grade A or A+</div>
+          <div class="stat-icon">🏆</div>
+        </div>
+      </div>
+
+      <!-- Chart + Insights -->
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-title"><span class="icon">📈</span> Grade Distribution</div>
+          <canvas id="gradeChart" height="220"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="icon">💡</span> Insights &amp; Alerts</div>
+          <div id="insights"><div class="text-muted">Loading insights…</div></div>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="grid grid-3" style="margin-top:24px;">
+        <a href="/students.html" class="card" style="text-decoration:none;display:block;cursor:pointer;">
+          <div style="font-size:26px;margin-bottom:10px;">👥</div>
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--text);margin-bottom:5px;font-size:15px;">Manage Students</div>
+          <div class="text-muted">Add, search and view students</div>
+        </a>
+        <a href="/assignments.html" class="card" style="text-decoration:none;display:block;cursor:pointer;">
+          <div style="font-size:26px;margin-bottom:10px;">📋</div>
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--text);margin-bottom:5px;font-size:15px;">Create Assignments</div>
+          <div class="text-muted">Build rubrics and assignments</div>
+        </a>
+        <a href="/evaluation.html" class="card" style="text-decoration:none;display:block;cursor:pointer;">
+          <div style="font-size:26px;margin-bottom:10px;">✏️</div>
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--text);margin-bottom:5px;font-size:15px;">Evaluate Students</div>
+          <div class="text-muted">Score and grade submissions</div>
+        </a>
+      </div>
+    </main>
+  </div>
+</div>
+<div id="toast-container"></div>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

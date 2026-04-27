@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Assignments | SmartEval</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body data-page="assignments">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">🎓</div>
+      <div><div class="brand-name">SmartEval</div><div class="brand-sub">Faculty Portal</div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-link"><span class="icon">📊</span> Dashboard</a>
+      <div class="nav-section-label">Manage</div>
+      <a href="/students.html"    class="nav-link"><span class="icon">👥</span> Students</a>
+      <a href="/assignments.html" class="nav-link active"><span class="icon">📋</span> Assignments</a>
+      <a href="/evaluation.html"  class="nav-link"><span class="icon">✏️</span> Evaluation</a>
+      <div class="nav-section-label">Reports</div>
+      <a href="/analytics.html" class="nav-link"><span class="icon">📈</span> Analytics</a>
+      <a href="/reports.html"   class="nav-link"><span class="icon">📄</span> Reports</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" id="darkToggle"><span class="icon">🌙</span> Dark Mode</a>
+      <a class="nav-link logout" id="logoutBtn"><span class="icon">🚪</span> Logout</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="page-content">
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <span class="topbar-title">Assignments</span>
+    </header>
+    <main>
+      <div class="page-header">
+        <h1>Assignment &amp; Rubric Builder</h1>
+        <p>Create assignments with detailed grading rubrics</p>
+      </div>
+
+      <div class="card" style="max-width:760px;">
+        <div class="card-title"><span class="icon">📋</span> New Assignment</div>
+        <form id="assignmentForm">
+          <div class="form-grid" style="margin-bottom:16px;">
+            <div class="form-group">
+              <label class="form-label">Assignment Title</label>
+              <input id="aTitle" placeholder="e.g. Midterm Project" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <select id="aSubject" required>
+                <option value="">Select subject…</option>
+                <option value="CSE316">CSE316</option>
+                <option value="INT219">INT219</option>
+                <option value="INT222">INT222</option>
+                <option value="INT428">INT428</option>
+                <option value="MTH302">MTH302</option>
+                <option value="CSE211">CSE211</option>
+                <option value="PEA305">PEA305</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Due Date</label>
+              <input id="aDue" type="date" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Template Name <span style="color:var(--muted);font-weight:400;text-transform:none;">(optional)</span></label>
+              <input id="aTemplate" placeholder="e.g. Lab Report Template"/>
+            </div>
+          </div>
+
+          <hr/>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 12px;">
+            <div style="font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--text);">
+              📝 Grading Rubric
+            </div>
+            <button type="button" id="addRubric" class="btn btn-ghost btn-sm">+ Add Criteria</button>
+          </div>
+
+          <div id="rubricWrap">
+            <div class="rubric-row">
+              <input class="criteria" placeholder="Criteria name (e.g. Code Quality)" required/>
+              <input class="maxMarks" type="number" min="1" placeholder="Max marks" required/>
+              <button type="button" class="rubric-remove" title="Remove">×</button>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:20px;">
+            <button type="submit" class="btn btn-primary">✅ Create Assignment</button>
+            <button type="reset" class="btn btn-ghost">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Created Assignments List -->
+      <div class="card" style="max-width:760px;margin-top:24px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+          <div class="card-title" style="margin-bottom:0;"><span class="icon">📋</span> Created Assignments <span id="assignmentCount" style="background:var(--primary);color:#fff;border-radius:999px;font-size:12px;padding:2px 10px;margin-left:8px;font-family:var(--mono);">0</span></div>
+        </div>
+        <div class="table-wrap" style="margin-top:12px;">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Subject</th>
+                <th>Due Date</th>
+                <th>Rubric Criteria</th>
+                <th>Max Marks</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="assignmentListBody">
+              <tr><td colspan="6"><div class="empty-state"><div class="empty-icon">📋</div><p>No assignments yet — create one above!</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+</div>
+<div id="toast-container"></div>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Students | SmartEval</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body data-page="students">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">🎓</div>
+      <div><div class="brand-name">SmartEval</div><div class="brand-sub">Faculty Portal</div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-link"><span class="icon">📊</span> Dashboard</a>
+      <div class="nav-section-label">Manage</div>
+      <a href="/students.html"    class="nav-link active"><span class="icon">👥</span> Students</a>
+      <a href="/assignments.html" class="nav-link"><span class="icon">📋</span> Assignments</a>
+      <a href="/evaluation.html"  class="nav-link"><span class="icon">✏️</span> Evaluation</a>
+      <div class="nav-section-label">Reports</div>
+      <a href="/analytics.html" class="nav-link"><span class="icon">📈</span> Analytics</a>
+      <a href="/reports.html"   class="nav-link"><span class="icon">📄</span> Reports</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" id="darkToggle"><span class="icon">🌙</span> Dark Mode</a>
+      <a class="nav-link logout" id="logoutBtn"><span class="icon">🚪</span> Logout</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="page-content">
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <span class="topbar-title">Students</span>
+    </header>
+    <main>
+      <div class="page-header">
+        <h1>Student Management</h1>
+        <p>Add new students and manage existing records</p>
+      </div>
+
+      <div class="grid grid-2">
+        <!-- Add Student Form -->
+        <div class="card">
+          <div class="card-title"><span class="icon">➕</span> Add New Student</div>
+          <form id="studentForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input id="sName" placeholder="e.g. Ravi Kumar" required/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Reg. Number</label>
+                <input id="sRoll" placeholder="e.g. 12306762" required/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input id="sEmail" type="email" placeholder="student@college.edu" required/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Section</label>
+                <select id="sSection" required>
+                  <option value="">Select section…</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Subject</label>
+                <select id="sSubject" required>
+                  <option value="">Select subject…</option>
+                  <option value="CSE316">CSE316</option>
+                  <option value="INT219">INT219</option>
+                  <option value="INT222">INT222</option>
+                  <option value="INT428">INT428</option>
+                  <option value="MTH302">MTH302</option>
+                  <option value="CSE211">CSE211</option>
+                  <option value="PEA305">PEA305</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Semester</label>
+                <input id="sSem" type="number" min="1" max="12" placeholder="e.g. 3" required/>
+              </div>
+            </div>
+            <div class="form-actions" style="margin-top:16px;">
+              <button type="submit" class="btn btn-primary">Save Student</button>
+              <button type="reset" class="btn btn-ghost">Reset</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Student List -->
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div style="padding:20px 24px 0;">
+            <div class="card-title"><span class="icon">👥</span> Student Records</div>
+          </div>
+          <!-- Filter bar -->
+          <div style="display:flex;gap:10px;padding:0 24px 16px;flex-wrap:wrap;">
+            <div style="position:relative;flex:1;min-width:160px;">
+              <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;">🔍</span>
+              <input id="searchStudent" placeholder="Search name, roll, email…" style="padding-left:34px;"/>
+            </div>
+            <select id="filterSubject" style="width:auto;min-width:140px;">
+              <option value="">All Subjects</option>
+              <option value="CSE316">CSE316</option>
+              <option value="INT219">INT219</option>
+              <option value="INT222">INT222</option>
+              <option value="INT428">INT428</option>
+              <option value="MTH302">MTH302</option>
+              <option value="CSE211">CSE211</option>
+              <option value="PEA305">PEA305</option>
+            </select>
+          </div>
+          <div class="table-wrap" style="border-radius:0;border-left:none;border-right:none;border-bottom:none;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Reg. No.</th>
+                  <th>Section</th>
+                  <th>Subject</th>
+                  <th>Sem</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody">
+                <tr><td colspan="6"><div class="empty-state"><div class="empty-icon">👥</div><p>No students yet</p></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<div id="toast-container"></div>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
