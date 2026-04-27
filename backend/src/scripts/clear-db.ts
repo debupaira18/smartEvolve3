@@ -10,20 +10,29 @@ import mongoose from "mongoose";
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/smart-eval";
+const MONGO_URI =
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/smart-eval";
 
 async function clearDatabase() {
   console.log(`Connecting to: ${MONGO_URI}`);
   await mongoose.connect(MONGO_URI);
   console.log("✅ Connected");
 
-  const collections = await mongoose.connection.db.listCollections().toArray();
+  const db = mongoose.connection.db;
+
+  // ✅ FIX: safety check for TypeScript
+  if (!db) {
+    throw new Error("❌ Database not initialized");
+  }
+
+  const collections = await db.listCollections().toArray();
+
   if (collections.length === 0) {
     console.log("Database is already empty.");
   } else {
     for (const col of collections) {
-      await mongoose.connection.db.dropCollection(col.name);
-      console.log(`🗑️  Dropped collection: ${col.name}`);
+      await db.dropCollection(col.name);
+      console.log(`🗑️ Dropped collection: ${col.name}`);
     }
     console.log("✅ All collections cleared.");
   }
