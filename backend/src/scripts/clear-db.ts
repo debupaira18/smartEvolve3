@@ -11,7 +11,7 @@ import mongoose from "mongoose";
 dotenv.config();
 
 const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/smart-eval";
+  process.env.MONGODB_URI || "mongodb+srv://debu:Debu%40123@cluster1.obllfdj.mongodb.net/smart-eval";
 
 async function clearDatabase() {
   console.log(`Connecting to: ${MONGO_URI}`);
